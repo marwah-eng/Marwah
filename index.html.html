@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3 WEEKS SMOKE FREE CELEBRATION 🎉</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Canvas Confetti for Visual Effects -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- FontAwesome 6 for visual icons (Guarantees no empty rectangles) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700;900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #311042 100%);
+            min-height: 100vh;
+            color: #ffffff;
+            touch-action: manipulation;
+            user-select: none;
+            overflow-x: hidden;
+        }
+
+        /* Pulse and glow animation for main button */
+        .pulse-glow {
+            animation: pulse-glow-anim 2s infinite;
+        }
+
+        @keyframes pulse-glow-anim {
+            0% { transform: scale(1); box-shadow: 0 0 15px rgba(236, 72, 153, 0.6); }
+            50% { transform: scale(1.06); box-shadow: 0 0 35px rgba(236, 72, 153, 0.9); }
+            100% { transform: scale(1); box-shadow: 0 0 15px rgba(236, 72, 153, 0.6); }
+        }
+
+        /* Heart beating animation */
+        .heart-beat {
+            animation: beat 1.2s ease-in-out infinite;
+        }
+
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            40% { transform: scale(1); }
+            60% { transform: scale(1.15); }
+        }
+
+        /* Floating Balloon Animation */
+        .float-balloon {
+            animation: float 3.5s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-18px) rotate(6deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        /* Gold Shiny Glow */
+        .gold-border-glow {
+            border: 3px solid #f59e0b;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+        }
+
+        .star-item {
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .star-item:active {
+            transform: scale(1.5) rotate(15deg);
+        }
+
+        /* Floating particles style */
+        .floating-icon {
+            position: absolute;
+            pointer-events: none;
+            animation: floatUp 2s linear forwards;
+            font-size: 2rem;
+            z-index: 50;
+        }
+
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0) scale(0.8); }
+            100% { opacity: 0; transform: translateY(-120px) scale(1.5); }
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-between p-4 min-h-screen">
+
+    <!-- TOP VISUAL HEADER (Trophies + Big 3 WEEKS Badge) -->
+    <header class="text-center mt-2 w-full max-w-md relative">
+        <div class="flex justify-center items-center gap-3 mb-2">
+            <span class="text-4xl">🏆</span>
+            <span class="text-4xl">🏆</span>
+            <span class="text-4xl">🏆</span>
+        </div>
+        
+        <!-- Big Visual Badge for 3 Weeks / 21 Days Champion -->
+        <div class="bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 text-gray-950 font-black py-3 px-6 rounded-3xl shadow-2xl gold-border-glow flex items-center justify-center gap-3">
+            <span class="text-3xl">🚫🚬</span>
+            <!-- Direction explicit LTR wrapper to keep numbers & text in order -->
+            <div dir="ltr" class="text-center flex flex-col items-center justify-center">
+                <div class="text-3xl leading-none font-black tracking-wider">3 WEEKS</div>
+                <div class="text-xs font-bold text-gray-900 mt-1 uppercase tracking-wider">21 DAYS CHAMPION!</div>
+            </div>
+            <span class="text-3xl">✨💪</span>
+        </div>
+    </header>
+
+    <main class="w-full max-w-md my-4 flex flex-col items-center gap-5">
+
+        <!-- MAIN HIGH-FIVE / LOVE TAP BUTTON (Huge Visual Reaction) -->
+        <div class="bg-slate-900/80 backdrop-blur-md p-6 rounded-3xl border-2 border-pink-500/50 text-center w-full shadow-2xl relative overflow-hidden flex flex-col items-center">
+            
+            <div dir="ltr" class="text-pink-300 font-black text-xs mb-3 flex items-center gap-2">
+                <span class="text-2xl animate-bounce">👇</span>
+                <span class="tracking-wider">TAP FOR CELEBRATION!</span>
+                <span class="text-2xl animate-bounce">👇</span>
+            </div>
+
+            <!-- Huge Interactive High-Five & Love Button -->
+            <button id="mainVisualBtn" onclick="triggerMegaCelebration(event)" class="pulse-glow bg-gradient-to-tr from-pink-600 via-rose-500 to-amber-400 text-white rounded-full w-32 h-32 flex flex-col items-center justify-center shadow-2xl border-4 border-white active:scale-90 transition-transform cursor-pointer relative">
+                <span class="text-5xl heart-beat">🖐️❤️</span>
+                <span dir="ltr" class="text-xs font-black mt-1 uppercase tracking-widest text-yellow-200">BRAVO!</span>
+            </button>
+
+            <!-- Visual indicator icon -->
+            <div dir="ltr" class="flex items-center gap-2 mt-4 text-xs font-bold text-pink-200">
+                <span>🎉</span>
+                <span>FIREWORKS & LOVE</span>
+                <span>✨</span>
+            </div>
+        </div>
+
+        <!-- VISUAL STORY CARDS (Guaranteed supported FontAwesome icons) -->
+        <div class="grid grid-cols-2 gap-3 w-full">
+            
+            <!-- Card 1: Clean Lungs (FontAwesome fa-lungs) -->
+            <button onclick="transformLungCard(this, event)" class="bg-slate-800/80 hover:bg-slate-700/80 p-4 rounded-3xl border border-emerald-500/40 flex flex-col items-center text-center transition active:scale-95 shadow-lg relative overflow-hidden">
+                <div class="text-4xl mb-2 text-emerald-400 visual-icon transition-transform flex items-center justify-center h-12">
+                    <i class="fa-solid fa-lungs"></i>
+                </div>
+                <div dir="ltr" class="text-xs font-black text-emerald-400">CLEAN LUNGS!</div>
+                <div dir="ltr" class="text-[10px] text-gray-300 mt-1">🚭 ➔ 🌸✨</div>
+                <span dir="ltr" class="text-xs mt-2 bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full font-bold">👉 TAP!</span>
+            </button>
+
+            <!-- Card 2: Anonymous Support & Prayer ("الباب الموارب") -->
+            <button onclick="triggerFarLoveSignal(this, event)" class="bg-slate-800/80 hover:bg-slate-700/80 p-4 rounded-3xl border border-purple-500/40 flex flex-col items-center text-center transition active:scale-95 shadow-lg relative overflow-hidden">
+                <div class="text-4xl mb-2 text-purple-400 visual-icon flex items-center justify-center h-12 gap-1">
+                    <i class="fa-solid fa-heart text-pink-400"></i>
+                    <i class="fa-solid fa-star text-amber-300 text-3xl"></i>
+                </div>
+                <div dir="ltr" class="text-xs font-black text-purple-300">ALWAYS PROUD!</div>
+                <div dir="ltr" class="text-[10px] text-gray-300 mt-1">🌌 ⭐ ➔ ❤️</div>
+                <span dir="ltr" class="text-xs mt-2 bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full font-bold">👉 TAP!</span>
+            </button>
+        </div>
+
+        <!-- 3 WEEKS STARS TRACKER -->
+        <div class="bg-slate-900/80 backdrop-blur-md p-5 rounded-3xl border border-yellow-500/30 w-full text-center shadow-xl">
+            <div dir="ltr" class="text-amber-400 font-black mb-3 flex items-center justify-center gap-2">
+                <span>⭐</span>
+                <span>3 WEEKS OF VICTORY!</span>
+                <span>⭐</span>
+            </div>
+            <div class="grid grid-cols-3 gap-3 my-2" id="weekStarGrid">
+                <!-- JavaScript generates 3 interactive Week stars -->
+            </div>
+            <div dir="ltr" class="text-[11px] text-slate-400 mt-2 font-bold">TAP EACH WEEK STAR TO CELEBRATE!</div>
+        </div>
+
+        <!-- MYSTERY GIFT BOX UNLOCK -->
+        <div class="bg-gradient-to-r from-indigo-900/60 to-purple-900/60 p-5 rounded-3xl border border-indigo-500/40 w-full text-center shadow-xl flex flex-col items-center">
+            <div dir="ltr" class="text-indigo-200 font-black text-xs mb-2">SPECIAL CHAMPION REWARD!</div>
+            
+            <button id="giftBoxBtn" onclick="openGiftBox(event)" class="text-6xl hover:scale-110 active:scale-95 transition-transform cursor-pointer p-3 my-1 border-2 border-dashed border-yellow-400 rounded-2xl bg-black/30">
+                🎁
+            </button>
+
+            <div id="giftStatus" dir="ltr" class="text-xs font-bold text-yellow-300 mt-2">
+                👉 TAP TO UNLOCK YOUR TROPHY!
+            </div>
+        </div>
+
+        <!-- POP BALLOONS & CELEBRATION -->
+        <div class="w-full text-center my-2">
+            <div dir="ltr" class="text-xs font-black text-pink-300 mb-2">🎈 TAP BALLOONS TO POP! 🎈</div>
+            <div class="flex justify-around items-center h-20 bg-slate-900/40 rounded-3xl border border-white/10 p-2">
+                <button onclick="popBalloon(this, event)" class="float-balloon text-5xl transition transform hover:scale-125 active:scale-50">🎈</button>
+                <button onclick="popBalloon(this, event)" class="float-balloon text-5xl transition transform hover:scale-125 active:scale-50" style="animation-delay: 0.8s;">🎉</button>
+                <button onclick="popBalloon(this, event)" class="float-balloon text-5xl transition transform hover:scale-125 active:scale-50" style="animation-delay: 1.6s;">🎈</button>
+                <button onclick="popBalloon(this, event)" class="float-balloon text-5xl transition transform hover:scale-125 active:scale-50" style="animation-delay: 0.4s;">🎆</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER VISUAL SIGNATURE -->
+    <footer class="text-center text-xs text-indigo-300 py-3 w-full border-t border-white/10 flex flex-col items-center gap-1">
+        <div dir="ltr" class="text-sm font-black text-amber-300 flex items-center gap-2">
+            <span>✨</span>
+            <span>YOU ARE A HERO!</span>
+            <span>✨</span>
+        </div>
+        <div dir="ltr" class="text-xs text-gray-400 flex items-center gap-1">
+            <span>❤️</span>
+            <span>ALWAYS SUPPORTING YOU FROM AFAR!</span>
+            <span>🕊️</span>
+        </div>
+    </footer>
+
+    <script>
+        // Generate 3 Big Stars for the 3 Weeks
+        const weekStarGrid = document.getElementById('weekStarGrid');
+        if (weekStarGrid) {
+            weekStarGrid.innerHTML = '';
+            for (let i = 1; i <= 3; i++) {
+                const starCard = document.createElement('div');
+                starCard.className = 'star-item bg-amber-400/20 border-2 border-amber-400/60 text-amber-300 rounded-2xl p-3 font-black text-xs shadow-md cursor-pointer flex flex-col items-center justify-center hover:bg-amber-400 hover:text-gray-950 transition-all';
+                starCard.innerHTML = `
+                    <div class="text-3xl mb-1">⭐</div>
+                    <div dir="ltr" class="font-black text-xs text-amber-200">WEEK ${i}</div>
+                    <div dir="ltr" class="text-[10px] opacity-80 mt-1">VICTORY</div>
+                `;
+                
+                starCard.onclick = (e) => {
+                    starCard.className = 'star-item bg-gradient-to-b from-amber-300 to-yellow-500 text-gray-950 font-black rounded-2xl p-3 text-xs shadow-2xl flex flex-col items-center justify-center scale-105 border-2 border-white';
+                    starCard.innerHTML = `
+                        <div class="text-3xl mb-1">🏆</div>
+                        <div dir="ltr" class="font-black text-xs text-gray-950">WEEK ${i}</div>
+                        <div dir="ltr" class="text-[10px] font-bold text-emerald-950">DONE! ✅</div>
+                    `;
+                    spawnSparks(e.clientX, e.clientY);
+                    fireConfettiAt(e.clientX / window.innerWidth, e.clientY / window.innerHeight);
+                };
+                weekStarGrid.appendChild(starCard);
+            }
+        }
+
+        // Fire Confetti at specific normalized coordinates
+        function fireConfettiAt(x, y) {
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 50,
+                    spread: 60,
+                    origin: { x: x, y: y }
+                });
+            }
+        }
+
+        // Mega Celebration trigger
+        function triggerMegaCelebration(e) {
+            spawnFloatingHearts(e.clientX, e.clientY);
+            
+            if (typeof confetti === 'function') {
+                // Multi-burst fireworks
+                confetti({ particleCount: 100, spread: 100, origin: { y: 0.5 } });
+                setTimeout(() => confetti({ particleCount: 80, angle: 60, spread: 85, origin: { x: 0 } }), 250);
+                setTimeout(() => confetti({ particleCount: 80, angle: 120, spread: 85, origin: { x: 1 } }), 500);
+            }
+        }
+
+        // Visual Card 1: Clean Lung Bloom Transformation
+        function transformLungCard(btn, e) {
+            const icon = btn.querySelector('.visual-icon');
+            icon.innerHTML = '<i class="fa-solid fa-lungs text-emerald-300"></i><span class="text-2xl ml-1">🌸✨</span>';
+            icon.style.transform = 'scale(1.3)';
+            spawnFloatingIcon(e.clientX, e.clientY, '🌸');
+            fireConfettiAt(e.clientX / window.innerWidth, e.clientY / window.innerHeight);
+            setTimeout(() => { icon.style.transform = 'scale(1)'; }, 600);
+        }
+
+        // Visual Card 2: Anonymous Far Love Signal ("الباب الموارب")
+        function triggerFarLoveSignal(btn, e) {
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    spawnFloatingIcon(e.clientX + (Math.random() * 100 - 50), e.clientY, '❤️');
+                }, i * 120);
+            }
+            fireConfettiAt(e.clientX / window.innerWidth, e.clientY / window.innerHeight);
+        }
+
+        // Pop Balloons
+        function popBalloon(element, e) {
+            spawnSparks(e.clientX, e.clientY);
+            fireConfettiAt(e.clientX / window.innerWidth, e.clientY / window.innerHeight);
+            element.style.transform = "scale(2) rotate(20deg)";
+            element.style.opacity = "0";
+            setTimeout(() => {
+                element.style.transform = "scale(1) rotate(0deg)";
+                element.style.opacity = "1";
+            }, 2500);
+        }
+
+        // Open Gift Box
+        function openGiftBox(e) {
+            const giftBtn = document.getElementById('giftBoxBtn');
+            const giftStatus = document.getElementById('giftStatus');
+            
+            giftBtn.innerHTML = '👑🏆🥇';
+            giftBtn.className = 'text-6xl p-3 my-1 border-4 border-amber-400 rounded-3xl bg-amber-400/20 scale-125 transition-transform';
+            giftStatus.innerHTML = '✨ 3-WEEK CHAMPION TROPHY! ✨';
+            
+            triggerMegaCelebration(e);
+        }
+
+        // Helper: Floating Heart particles
+        function spawnFloatingHearts(x, y) {
+            for (let i = 0; i < 5; i++) {
+                spawnFloatingIcon(x + (Math.random() * 60 - 30), y, '💖');
+            }
+        }
+
+        // Helper: Floating Icon Particle Animation
+        function spawnFloatingIcon(x, y, symbol) {
+            const iconEl = document.createElement('div');
+            iconEl.className = 'floating-icon';
+            iconEl.innerText = symbol;
+            iconEl.style.left = `${x - 15}px`;
+            iconEl.style.top = `${y - 15}px`;
+            document.body.appendChild(iconEl);
+            setTimeout(() => iconEl.remove(), 2000);
+        }
+
+        // Helper: Particle Sparks
+        function spawnSparks(x, y) {
+            const symbols = ['✨', '🌟', '💥', '⭐'];
+            for (let i = 0; i < 4; i++) {
+                spawnFloatingIcon(x + (Math.random() * 40 - 20), y, symbols[i % symbols.length]);
+            }
+        }
+
+        // Initial Celebration Burst on Page Load
+        window.onload = () => {
+            setTimeout(() => {
+                if (typeof confetti === 'function') {
+                    confetti({ particleCount: 70, spread: 80, origin: { y: 0.6 } });
+                }
+            }, 600);
+        };
+    </script>
+</body>
+</html>
